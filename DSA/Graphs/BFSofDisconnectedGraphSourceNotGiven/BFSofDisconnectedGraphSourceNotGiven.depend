@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1620809753 source:c:\users\vijay sai nag\desktop\exp\c++ - programming\bfsofdisconnectedgraphsourcenotgiven\main.cpp
+	<iostream>
+	<vector>
+	<queue>
+

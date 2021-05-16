@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1620813999 source:c:\users\vijay sai nag\desktop\exp\c++ - programming\reachablecomponentsingraph\main.cpp
+	<iostream>
+	<vector>
+	<queue>
+
