@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1624418823 source:c:\users\vijay sai nag\desktop\exp\c++ - programming\policethiefproblem\main.cpp
+	<iostream>
+	<vector>
+	<stack>
+
