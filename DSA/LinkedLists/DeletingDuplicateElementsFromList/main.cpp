@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include<bits/stdc++.h>
 
 using namespace std;
 
@@ -63,21 +64,44 @@ void uniquenodes(node** head)
     temp->next = NULL;
 }
 
-void printnode(node** head)
+void printnode(node* head)
 {
-    node* temp = *head;
+    node* temp = head;
     if(temp->next == NULL)
     {
         cout << temp->data;
         return;
     }
     cout << temp->data << " ";
-    printnode(&temp->next);
+    printnode(temp->next);
     /*while(temp->next != NULL)
     {
         cout << temp->data << " ";
         temp = temp->next;
     }*/
+}
+
+void UniqueNodesEff(node* head)
+{
+    if(head == NULL || head->next == NULL)return;
+    node* temp = head;
+    unordered_set<int> mp;
+    node* prev = NULL;
+    while(temp != NULL)
+    {
+        if(mp.find(temp->data) != mp.end())
+        {
+            prev->next = temp->next;
+            delete(temp);
+        }
+        else
+        {
+            mp.insert(temp->data);
+            prev = temp;
+        }
+        temp = prev->next;
+    }
+    printnode(head);
 }
 
 int main()
@@ -96,9 +120,10 @@ int main()
             insertnode(&head,x);
         }
     }
-    printnode(&head);
-    uniquenodes(&head);
-    cout << "\nAfter eliminating Duplicate elements : ";
-    printnode(&head);
+    printnode(head);
+    cout << "Efficient method : ";UniqueNodesEff(head);
+    //cout << "naive method :";uniquenodes(&head);
+    //cout << "\nAfter eliminating Duplicate elements : ";
+    //printnode(&head);
     return 0;
 }

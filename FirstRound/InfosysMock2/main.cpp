@@ -66,6 +66,11 @@ int main()
             cout << "\n";
         }
     }
+    vector<int> k;
+    for(int i=1;i<n;i++)
+    {
+        k.push_back(i);
+    }
     cout << "\nPossible pairs are : " << c+n;
     return 0;
 }

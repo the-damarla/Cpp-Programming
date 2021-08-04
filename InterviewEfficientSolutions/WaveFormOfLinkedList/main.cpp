@@ -33,7 +33,7 @@ void PrintList(node* head)
     cout << head->data << "->";
     PrintList(head->next);
 }
-
+/*
 void WaveList(node** head)
 {
     node* temp = *head;
@@ -53,7 +53,33 @@ void WaveList(node** head)
         TempNext = (temp) ? temp->next : NULL;
     }
 }
+*/
 
+void WaveList(node** head)
+{
+    node*  temp = *head;
+    if(temp==NULL || temp->next == NULL)return;
+    bool flag = true;
+    while(temp->next)
+    {
+        if(flag)
+        {
+            if(temp->data > temp->next->data)
+            {
+                swap(temp->data,temp->next->data);
+            }
+        }
+        else
+        {
+            if(temp->data < temp->next->data)
+            {
+                swap(temp->data,temp->next->data);
+            }
+        }
+        temp = temp->next;
+        flag = !flag;
+    }
+}
 int main()
 {
     cout << "Enter \'0\' to stop giving input" << endl;
