@@ -1,70 +1,79 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 
 using namespace std;
 
-struct TrieNode
+vector<vector<int>> SpiralCreation(int n)
 {
-    struct TrieNode *child[26];
-    bool isEnd;
-};
+	vector<vector<int>> grid(n,vector<int>(n,0));
+	int inc = 1;
+	int dir=0,top=0,left=0,right=n-1,down=n-1;
 
-struct TrieNode *getNode(void)
-{
-    struct TrieNode *newnode = new TrieNode;
-    newnode->isEnd = false;
-    for(int i=0;i<26;i++)
-        newnode->child[i] = NULL;
-    return newnode;
-};
-
-void insert(struct TrieNode *root,string s)
-{
-    struct TrieNode *cur = root;
-    int len = s.length();
-    for(int i=0;i<len;i++)
-    {
-        int index = s[i] - 'a';
-        if(cur->child[index] == NULL)
-            cur->child[index] = getNode();
-        cur = cur->child[index];
-    }
-    cur->isEnd = true;
-}
-
-bool search(struct TrieNode *root,string s)
-{
-    struct TrieNode *cur = root;
-    int len = s.length();
-    for(int i=0;i<len;i++)
-    {
-        int index = s[i] - 'a';
-        if(!cur->child[index])
-            return false;
-        cur = cur->child[index];
-    }
-    return cur->isEnd;
+	while(top <= down && left <= right)
+	{
+		if(dir == 0)
+		{
+			for(int i=left;i<=right;i++)
+			{
+				grid[top][i] = inc;
+				//cout << top << i << " ";
+				inc++;
+			}
+			//cout << "\n";
+			top++;
+		}
+		if(dir == 1)
+		{
+			//cout << "-----> right" << right << " ";
+			for(int i=top;i<=down;i++)
+			{
+				grid[i][right] = inc;
+				//cout << i << right << " ";
+				inc++;
+			}
+			//cout << "\n";
+			right--;
+		}
+		if(dir == 2)
+		{
+			for(int i=right;i>=left;i--)
+			{
+				grid[down][i] = inc;
+				//cout << down << i << " ";
+				inc++;
+			}
+			//cout << "\n";
+			down--;
+		}
+		if(dir == 3)
+		{
+			for(int i=down;i>=top;i--)
+			{
+				grid[i][left] = inc;
+				//cout << i << left << " ";
+				inc++;
+			}
+			//cout << "\n";
+			left++;
+		}
+		//dir++;
+		dir = (dir+1)%4;
+		//cout << dir << "\n";
+	}
+	//cout << "\n";
+	return grid;
 }
 
 int main()
 {
-    cout << "Enter \'STOP\' to stop giving input\n";
-    struct TrieNode *root = getNode();
-    while(1)
-    {
-        cout << "Enter data : ";string s;cin >> s;
-        if(s[0] == 'S')break;
-        else insert(root,s);
-    }
-    cout << "now Search function\n";
-    while(1)
-    {
-        cout << "Enter data : ";string s;cin >> s;
-        if(s[0] == 'S')break;
-        else
-        {
-            if(search(root,s))cout << "\nFound\n";
-            else cout << "\nNOT FOUND\n";
-        }
-    }
-    return 0;
+	int n;cout << "Enter a number : ";
+	cin >> n;
+	vector<vector<int>> grid(n,vector<int>(n));
+	grid = SpiralCreation(n);
+	for(int i=0;i<n;i++)
+	{
+		for(int j=0;j<n;j++)
+			cout << grid[i][j] << " ";
+		cout << "\n";
+	}
+	return 0;
 }
